@@ -1,0 +1,4 @@
+spring:
+  profiles:
+    active: local # 실행할 환경 선택 (dev, prod, test 중 선택)
+
