@@ -9,7 +9,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/YoonONi?serverTimezone=UTC&characterEncoding=UTF-8
-    username: rladbsdnjs87
+    username: root
     password: dbsdnjs7968
 
   jpa:
@@ -18,3 +18,13 @@ spring:
     hibernate:
       ddl-auto: update # 데이터 유지하려면 update, 테스트용이면 create 가능
     database-platform: org.hibernate.dialect.MySQLDialect # MySQL 방언 설정 추가
+
+chatgpt:
+  api-key : ${GPT_KEY}
+  model : text-davinci-003
+openai:
+  url:
+    model : https://api.openai.com/v1/models
+    model-list : https://api.openai.com/v1/models/
+    legacy-prompt : https://api.openai.com/v1/completions
+    prompt : https://api.openai.com/v1/chat/completions
