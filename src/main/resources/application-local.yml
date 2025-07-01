@@ -19,6 +19,9 @@ spring:
       ddl-auto: update # 데이터 유지하려면 update, 테스트용이면 create 가능
     database-platform: org.hibernate.dialect.MySQLDialect # MySQL 방언 설정 추가
 
+logging:
+  config: classpath:logback-spring-local.xml
+
 chatgpt:
   api-key : ${GPT_KEY}
   model : text-davinci-003
@@ -28,3 +31,6 @@ openai:
     model-list : https://api.openai.com/v1/models/
     legacy-prompt : https://api.openai.com/v1/completions
     prompt : https://api.openai.com/v1/chat/completions
+
+mybatis:
+  mapper-locations: classpath:mybatis/mappers/*.xml
