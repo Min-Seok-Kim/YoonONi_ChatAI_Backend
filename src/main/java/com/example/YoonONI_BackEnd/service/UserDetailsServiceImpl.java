@@ -17,11 +17,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserVo user = userMapper.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
-
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        UserVo user = userMapper.selectUser(userId);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with userId: " + userId);
+        }
         return UserDetailsImpl.build(user);
-    }
     }
 }

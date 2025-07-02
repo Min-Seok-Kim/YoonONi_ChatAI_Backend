@@ -13,5 +13,24 @@
                      #{heightCm}, #{weightKg}
                  )
     </insert>
+    
+    <select id="existsByUserId" parameterType="string" resultType="boolean">
+        select exists(
+        select 1 from users where user_id = #{userId}
+                            )
+    </select>
+
+    <select id="selectUser" parameterType="string" resultType="com.example.YoonONI_BackEnd.vo.UserVo">
+        select user_id,
+               password,
+               email,
+               gender,
+               birth_date,
+               height_cm,
+               weight_kg
+        from users
+        where
+            user_id = #{userId}
+    </select>
 
 </mapper>

@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserVo {
     private String userId;
     private String password;

@@ -1,6 +1,8 @@
 package com.example.YoonONI_BackEnd.config;
 
 
+import com.example.YoonONI_BackEnd.service.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,18 +26,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
-    @Autowired
-    UserDetailsServiceImpl userDetailsService; // 사용자 인증 정보를 가져오는 클래스
 
-    @Autowired
-    private AuthEntryPointJwt unauthorizedHandler; // 인증 실패 시 401 응답을 주는 핸들러
+    private final UserDetailsServiceImpl userDetailsService; // 사용자 인증 정보를 가져오는 클래스
+
+    private final AuthEntryPointJwt unauthorizedHandler; // 인증 실패 시 401 응답을 주는 핸들러
 
     /*
     요청마다 JWT 토큰을 꺼내고 검증해서 SecurityContext에 유저 정보 등록
      */
     @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {//
+    public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
     }
 
@@ -80,7 +82,7 @@ public class SecurityConfig {
 
         http.authenticationProvider(authenticationProvider());
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new AuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

@@ -7,4 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
     void insertUser(UserVo user);
+    UserVo selectUser(String userId);
+
+    boolean existsByUserId(String userId);
 }
