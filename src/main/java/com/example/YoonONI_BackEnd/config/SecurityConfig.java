@@ -33,13 +33,7 @@ public class SecurityConfig {
 
     private final AuthEntryPointJwt unauthorizedHandler; // 인증 실패 시 401 응답을 주는 핸들러
 
-    /*
-    요청마다 JWT 토큰을 꺼내고 검증해서 SecurityContext에 유저 정보 등록
-     */
-    @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
-    }
+    private final AuthTokenFilter authTokenFilter;
 
     /*
     Spring Security는 로그인 시 UserDetailsService에서 유저를 찾아서,
@@ -82,7 +76,7 @@ public class SecurityConfig {
 
         http.authenticationProvider(authenticationProvider());
 
-        http.addFilterBefore(new AuthTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

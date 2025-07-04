@@ -1,6 +1,7 @@
 package com.example.YoonONI_BackEnd.controller;
 
 
+import com.example.YoonONI_BackEnd.config.RequestDataSet;
 import com.example.YoonONI_BackEnd.dto.LoginRequestDto;
 import com.example.YoonONI_BackEnd.dto.UserRequestDto;
 import com.example.YoonONI_BackEnd.service.UserService;
@@ -18,14 +19,14 @@ public class UserController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signUp(@RequestBody UserRequestDto userRequestDto) {
+    public ResponseEntity<?> signUp(RequestDataSet requestDataSet) {
 
-        return userService.signUp(userRequestDto);
+        return userService.signUp(requestDataSet);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequestDto) {
-        userService.login(loginRequestDto);
-        return ResponseEntity.ok().body("로그인 성공");
+
+        return userService.login(loginRequestDto);
     }
 }
