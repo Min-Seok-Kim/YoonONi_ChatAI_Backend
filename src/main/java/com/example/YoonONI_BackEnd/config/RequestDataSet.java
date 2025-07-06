@@ -1,6 +1,5 @@
 package com.example.YoonONI_BackEnd.config;
 
-import com.example.YoonONI_BackEnd.config.util.AppUtil;
 import com.example.YoonONI_BackEnd.config.util.DateUtil;
 import com.example.YoonONI_BackEnd.service.UserDetailsServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -33,10 +32,6 @@ public class RequestDataSet {
 
     @Setter
     private UserDetailsServiceImpl userService;
-
-    // 필요 시 응답 로깅, 세션 사용자 등 다른 의존성도 추가 가능
-    // private ResponseLogger responseLogger;
-    // private SecureUserDetailsService userService;
 
     public void arrangeInputParameters(HttpServletRequest request) {
         input.clear();
@@ -100,12 +95,10 @@ public class RequestDataSet {
         String url = request.getRequestURL().toString();
 
         String uri = request.getRequestURI();
-        // 80번 기본포트를 사용하는거에 WebToBe는 뒤에 :80을 붙이므로..
+
         String host = StringUtils.removeEnd(url, uri);
         host = StringUtils.endsWith(host, ":80") ? StringUtils.removeEnd(host, ":80") : host;
 
-//		map.put("ctrl_request_uri", uri);
-        // 끝에 "/" 붙으면 t_menu의 url에서 찾지 못하기 때문에 제거함(trunk 동일반영했음).
         map.put("ctrl_request_uri", StringUtils.removeEnd(uri, "/"));
         map.put("ctrl_request_url", url);
         map.put("ctrl_host", host);
@@ -118,10 +111,6 @@ public class RequestDataSet {
         if ("#".equals(inGetString("ctrl_action_url"))) {
             inSet("ctrl_action_url", uri);
         }
-
-        // 접속정보
-        String deviceTypeCd = AppUtil.IS_PC.equals(AppUtil.getDeviceType(request)) ? "WIN" : "AND";
-        inSetIfBlank("device_type_cd", deviceTypeCd);
 
         }
 

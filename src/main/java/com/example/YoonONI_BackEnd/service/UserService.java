@@ -1,15 +1,13 @@
 package com.example.YoonONI_BackEnd.service;
 
 
-import com.example.YoonONI_BackEnd.config.JwtTokenProvider;
+import com.example.YoonONI_BackEnd.config.security.JwtTokenProvider;
 import com.example.YoonONI_BackEnd.config.RequestDataSet;
 import com.example.YoonONI_BackEnd.dto.JwtResponseDto;
 import com.example.YoonONI_BackEnd.dto.LoginRequestDto;
-import com.example.YoonONI_BackEnd.dto.UserRequestDto;
 import com.example.YoonONI_BackEnd.mapper.UserMapper;
 import com.example.YoonONI_BackEnd.vo.UserVo;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -101,9 +99,9 @@ public class UserService {
         return ResponseEntity.ok().body("성공");
     }
 
-    public ResponseEntity<?> login(LoginRequestDto loginRequestDto) {
+    public ResponseEntity<?> login(RequestDataSet requestDataSet) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequestDto.getUserId(), loginRequestDto.getPassword()));
+                new UsernamePasswordAuthenticationToken(requestDataSet.inGetString("userId"), requestDataSet.inGetString("password")));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

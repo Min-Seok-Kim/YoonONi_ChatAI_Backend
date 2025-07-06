@@ -1,4 +1,4 @@
-package com.example.YoonONI_BackEnd.config;
+package com.example.YoonONI_BackEnd.config.security;
 
 import java.io.IOException;
 

@@ -13,8 +13,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/YoonONi?serverTimezone=UTC&characterEncoding=UTF-8
-    username: root
-    password: dbsdnjs7968
+    username: ${USERNAME}
+    password: ${PASSWORD}
 
   jpa:
     open-in-view: false
