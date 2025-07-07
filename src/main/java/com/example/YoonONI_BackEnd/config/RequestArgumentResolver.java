@@ -1,6 +1,7 @@
 package com.example.YoonONI_BackEnd.config;
 
-import com.example.YoonONI_BackEnd.service.UserDetailsServiceImpl;
+import com.example.YoonONI_BackEnd.service.auth.UserDetailsImpl;
+import com.example.YoonONI_BackEnd.service.auth.UserDetailsServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +11,6 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-
-import java.net.http.HttpRequest;
 
 @Component
 @RequiredArgsConstructor
@@ -28,13 +27,13 @@ public class RequestArgumentResolver implements HandlerMethodArgumentResolver {
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 
-
-
         RequestDataSet dataSet = new RequestDataSet();
+
+        dataSet.arrangeInputParameters(request);
 
         dataSet.setUserService(userDetailsService);
 
-        dataSet.arrangeInputParameters(request);
+        dataSet.setUserDetails();
 
         if (log.isInfoEnabled() || log.isDebugEnabled()) {
             log.info("#### {} ####", dataSet.printInputParams());

@@ -3,7 +3,7 @@ package com.example.YoonONI_BackEnd.config.security;
 
 import java.util.Date;
 
-import com.example.YoonONI_BackEnd.service.UserDetailsImpl;
+import com.example.YoonONI_BackEnd.service.auth.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

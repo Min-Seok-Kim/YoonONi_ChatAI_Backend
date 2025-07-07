@@ -1,7 +1,8 @@
 package com.example.YoonONI_BackEnd.config;
 
 import com.example.YoonONI_BackEnd.config.util.DateUtil;
-import com.example.YoonONI_BackEnd.service.UserDetailsServiceImpl;
+import com.example.YoonONI_BackEnd.service.auth.UserDetailsImpl;
+import com.example.YoonONI_BackEnd.service.auth.UserDetailsServiceImpl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,15 +10,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.authentication.RememberMeAuthenticationToken;
-import org.springframework.web.util.WebUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.security.Principal;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +28,9 @@ public class RequestDataSet {
 
     @Setter
     private UserDetailsServiceImpl userService;
+
+    @Setter
+    private UserDetailsImpl userDetails;
 
     public void arrangeInputParameters(HttpServletRequest request) {
         input.clear();
@@ -113,6 +112,16 @@ public class RequestDataSet {
         }
 
         }
+
+    public void setUserDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            input.put("userId", authentication.getName());
+        }
+    }
+
+
 
     public void inSetIfBlank(String key, Object val) {
         if (this.input.containsKey(key)) {

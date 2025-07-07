@@ -2,7 +2,7 @@ package com.example.YoonONI_BackEnd.config.security;
 
 import java.io.IOException;
 
-import com.example.YoonONI_BackEnd.service.UserDetailsServiceImpl;
+import com.example.YoonONI_BackEnd.service.auth.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

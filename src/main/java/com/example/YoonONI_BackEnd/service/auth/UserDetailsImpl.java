@@ -1,8 +1,7 @@
-package com.example.YoonONI_BackEnd.service;
+package com.example.YoonONI_BackEnd.service.auth;
 
 import com.example.YoonONI_BackEnd.vo.UserVo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package com.example.YoonONI_BackEnd.service;
+package com.example.YoonONI_BackEnd.service.auth;
 
 import com.example.YoonONI_BackEnd.mapper.UserMapper;
 import com.example.YoonONI_BackEnd.vo.UserVo;

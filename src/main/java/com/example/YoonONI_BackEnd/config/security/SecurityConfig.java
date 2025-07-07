@@ -1,7 +1,7 @@
 package com.example.YoonONI_BackEnd.config.security;
 
 
-import com.example.YoonONI_BackEnd.service.UserDetailsServiceImpl;
+import com.example.YoonONI_BackEnd.service.auth.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

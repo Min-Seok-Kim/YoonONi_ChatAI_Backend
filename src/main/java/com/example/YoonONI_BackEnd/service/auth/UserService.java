@@ -1,10 +1,9 @@
-package com.example.YoonONI_BackEnd.service;
+package com.example.YoonONI_BackEnd.service.auth;
 
 
 import com.example.YoonONI_BackEnd.config.security.JwtTokenProvider;
 import com.example.YoonONI_BackEnd.config.RequestDataSet;
 import com.example.YoonONI_BackEnd.dto.JwtResponseDto;
-import com.example.YoonONI_BackEnd.dto.LoginRequestDto;
 import com.example.YoonONI_BackEnd.mapper.UserMapper;
 import com.example.YoonONI_BackEnd.vo.UserVo;
 import lombok.RequiredArgsConstructor;
