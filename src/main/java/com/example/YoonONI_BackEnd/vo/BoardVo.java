@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 public class BoardVo {
+    private Integer id;
     private String title;
     private String userId;
     private String content;

@@ -31,4 +31,16 @@ public class BoardService {
 
         return ResponseEntity.ok().body(boardMapper.selectAllBoard());
     }
+
+    public ResponseEntity<?> updateBoard(int id, RequestDataSet requestDataSet) {
+        BoardVo boardVo = BoardVo.builder()
+                .content(requestDataSet.inGetString("content"))
+                .title(requestDataSet.inGetString("title"))
+                .updatedAt(LocalDateTime.now())
+                .build();
+
+        boardMapper.updateBoard(id, boardVo);
+
+        return ResponseEntity.ok().body("성공");
+    }
 }

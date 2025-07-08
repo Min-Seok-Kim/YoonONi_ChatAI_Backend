@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -116,8 +117,16 @@ public class RequestDataSet {
     public void setUserDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
+        if(input.containsKey("userId")) return;
+
         if (authentication != null && authentication.isAuthenticated()) {
-            input.put("userId", authentication.getName());
+            Object principal = authentication.getPrincipal();
+
+            if (principal instanceof UserDetailsImpl userDetails) {
+                input.put("userId", userDetails.getUsername());
+            } else if (principal instanceof String && !"anonymousUser".equals(principal)) {
+                input.put("userId", principal.toString());
+            }
         }
     }
 

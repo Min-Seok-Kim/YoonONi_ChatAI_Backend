@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,5 +22,10 @@ public class BoardController {
     @GetMapping("/board/search")
     public ResponseEntity<?> search(RequestDataSet requestDataSet) {
         return boardService.selectAllBoard(requestDataSet);
+    }
+
+    @PutMapping("/board/{id}")
+    public ResponseEntity<?> modify(@PathVariable int id, RequestDataSet requestDataSet) {
+        return boardService.updateBoard(id, requestDataSet);
     }
 }

@@ -11,10 +11,25 @@
                          )
     </insert>
 
-    <insert id="selectAllBoard" parameterType="com.example.YoonONI_BackEnd.vo.BoardVo">
+    <select id="selectAllBoard" resultType="com.example.YoonONI_BackEnd.vo.BoardVo">
         SELECT
-            title, user_id, content, write_at, updated_at
+            id, title, user_id, content, write_at, updated_at
         FROM
             board
-    </insert>
+    </select>
+
+    <update id="updateBoard">
+        update
+            board
+        <set>
+            <if test="boardVo.title != null">
+                title = #{boardVo.title},
+            </if>
+            <if test="boardVo.content != null and boardVo.content != '' ">
+                content = #{boardVo.content},
+            </if>
+            updated_at = #{boardVo.updatedAt}
+        </set>
+        where id = #{id}
+    </update>
 </mapper>
