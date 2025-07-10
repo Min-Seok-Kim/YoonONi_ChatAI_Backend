@@ -14,4 +14,6 @@ public interface BoardMapper {
     List<BoardVo> selectAllBoard();
 
     void updateBoard(@Param("id") int id, @Param("boardVo") BoardVo boardVo);
+
+    void deleteBoard(int id);
 }

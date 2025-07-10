@@ -10,22 +10,28 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/board")
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
 
-    @PostMapping("/board/save")
+    @PostMapping("/save")
     public ResponseEntity<?> save(RequestDataSet requestDataSet) {
         return boardService.saveBoard(requestDataSet);
     }
 
-    @GetMapping("/board/search")
+    @GetMapping("/search")
     public ResponseEntity<?> search(RequestDataSet requestDataSet) {
         return boardService.selectAllBoard(requestDataSet);
     }
 
-    @PutMapping("/board/{id}")
+    @PutMapping("/:{id}")
     public ResponseEntity<?> modify(@PathVariable int id, RequestDataSet requestDataSet) {
         return boardService.updateBoard(id, requestDataSet);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable int id, RequestDataSet requestDataSet) {
+        return boardService.deleteBoard(id, requestDataSet);
     }
 }

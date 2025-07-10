@@ -83,12 +83,6 @@ public class DateUtil {
         return dateFormat.format(cal.getTime());
     }
 
-    /**
-     * String �뺤쓽 �좎쭨瑜� �щĸ�뺤떇�쇰줈 諛섑솚
-     *
-     * @param dateStr - yy.m.d
-     * @return
-     */
     public static String getConvertStringToDate(String dateStr, String format) throws Exception {
         String[] dateSplit = dateStr.split("\\.");
         int year = Integer.parseInt("20" + dateSplit[0].replaceAll(" ", ""));
@@ -102,12 +96,6 @@ public class DateUtil {
         return dateFormat.format(cal.getTime());
     }
 
-    /**
-     * �좎쭨 String�� Calendar 媛앹껜濡� 蹂��섑빐二쇰뒗 硫붿냼��.
-     *
-     * @param dateStr
-     * @return
-     */
     public static Calendar toCalendar(String dateStr) {
         DateFormat format = getProperFormat(dateStr);
 
@@ -124,12 +112,6 @@ public class DateUtil {
         return calendar;
     }
 
-    /**
-     * �좎쭨 String�� 湲몄씠�� �곕씪 �곸젅�� DateFormat�� 諛섑솚�섎뒗 硫붿냼��.
-     *
-     * @param dateStr
-     * @return
-     */
     private static DateFormat getProperFormat(String dateStr) {
         DateFormat format;
         if (dateStr.length() == SHORT_DATE_STR.length()) {
@@ -142,13 +124,6 @@ public class DateUtil {
         return format;
     }
 
-    /**
-     * �좎쭨 String�� 諛쏆븘�� i 媛믪뿉�� 吏��뺥븳 �좎쭨留뚰겮 �뷀븳 �좎쭨 String�� 諛섑솚�섎뒗 硫붿냼��.
-     *
-     * @param dateStr
-     * @param i
-     * @return
-     */
     public static String add(String dateStr, int i) {
         String retStr = dateStr;
         if (!StringUtils.isEmpty(dateStr) && dateStr.length() >= SHORT_DATE_STR.length()) {
@@ -161,13 +136,6 @@ public class DateUtil {
         return retStr;
     }
 
-    /**
-     * �붿쓣 �곗궛�쒕떎.
-     *
-     * @param dateStr yyyyMM or yyyyMMdd
-     * @param i
-     * @return dateStr 湲몄씠�� �곕씪 媛숈� �뺤떇 諛섑솚
-     */
     public static String addMonth(String dateStr, int i) {
         String retStr = dateStr;
 
@@ -211,26 +179,10 @@ public class DateUtil {
         return DB_DATETIME_FORMAT.format(date);
     }
 
-    /**
-     * �좎쭨李⑥씠瑜� 援ы븳�� �쒖옉怨� 醫낅즺�쇱쓣 �ы븿 ��) 2008-03-05 - 2008-03-02 �좎쭨李⑥씠�� 4��
-     *
-     * @param destDate
-     * @param srcDate
-     * @return
-     */
     public static long dateDiff(String destDate, String srcDate) {
         return dateDiff(destDate, srcDate, true);
     }
 
-    /**
-     * �좎쭨李⑥씠援ы븿
-     *
-     * @param destDate
-     * @param srcDate
-     * @param containStartEndDt �쒖옉,醫낅즺�� �ы븿 true: 2008-03-05 - 2008-03-02 => 4 false: 2008-03-05
-     *                          - 2008-03-02 => 3
-     * @return
-     */
     public static long dateDiff(String destDate, String srcDate, boolean containStartEndDt) {
         long diffDate = 0;
         try {
@@ -249,25 +201,10 @@ public class DateUtil {
         return diffDate;
     }
 
-    /**
-     * �� �좎쭨 �ъ씠�� 媛쒖썡 �� 李⑥씠瑜� 援ы븳�� ��) 202210 - 202208 媛쒖썡 �� 李⑥씠�� 2
-     *
-     * @param destMonth
-     * @param srcMonth
-     * @return
-     */
     public static long monthDiff(String destMonth, String srcMonth) {
         return monthDiff(destMonth, srcMonth, false);
     }
 
-    /**
-     * �좎쭨李⑥씠援ы븿
-     *
-     * @param destMonth
-     * @param srcMonth
-     * @param containStartEndMon �쒖옉,醫낅즺�� �ы븿 true: 202210 - 202208 => 3 false: 202210 - 202208 => 2
-     * @return
-     */
     public static long monthDiff(String destMonth, String srcMonth, boolean containStartEndMon) {
         long diffMonth = 0;
 
@@ -287,13 +224,6 @@ public class DateUtil {
         return diffMonth;
     }
 
-    /**
-     * �쒖옉怨� 醫낅즺�쇱쓽 �꾨룄 援ы븯湲�
-     *
-     * @param fromDt
-     * @param toDt
-     * @return
-     */
     public static String[] calBetweenYear(String fromDt, String toDt) {
         if (StringUtils.isBlank(fromDt) || StringUtils.isBlank(toDt)) {
             return null;
@@ -313,13 +243,6 @@ public class DateUtil {
         return retArray;
     }
 
-    /**
-     * �쒖옉怨� 醫낅즺�쇱쓽 �꾨룄/�� 援ы븯湲�
-     *
-     * @param fromDt
-     * @param toDt
-     * @return
-     */
     public static String[] calBetweenYearMonth(String fromDt, String toDt) {
         if (StringUtils.isBlank(fromDt) || StringUtils.isBlank(toDt)) {
             return null;
@@ -349,12 +272,6 @@ public class DateUtil {
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
-    /**
-     * �ъ쓽 留덉�留� �좎쭨瑜� 援ы븿.
-     *
-     * @param dateStr yyyyMM or yyyyMMdd
-     * @return yyyyMMdd
-     */
     public static String getLastDateOfMonth(String dateStr) {
         if (dateStr == null || dateStr.length() < 6) {
             return "";
@@ -364,13 +281,6 @@ public class DateUtil {
 
         return dateStr.substring(0, 6) + StringUtils.leftPad(getLastDayOfMonth(str) + "", 2, "0");
     }
-
-    /**
-     * 泥ル쾲吏� �좎쭨�� �붿씪�� 援ы븿.
-     *
-     * @param dateStr 201301, 20130101
-     * @return
-     */
     public static int getFirstDayOfWeek(String dateStr) {
         if (dateStr == null || dateStr.length() < 6) {
             return -1;
@@ -381,55 +291,6 @@ public class DateUtil {
         return cal.get(Calendar.DAY_OF_WEEK);
     }
 
-    /**
-     * �대떦 �좎쭨�� �붿씪�� 援ы븿.
-     *
-     * @param dateStr
-     * @return
-     */
-    public static String getDayOfWeek(String dateStr) {
-        String str = dateStr;
-
-        Calendar cal = toCalendar(str);
-
-        switch (cal.get(Calendar.DAY_OF_WEEK)) {
-            case 1:
-                str = "��";
-                break;
-            case 2:
-                str = "��";
-                break;
-            case 3:
-                str = "��";
-                break;
-            case 4:
-                str = "��";
-                break;
-            case 5:
-                str = "紐�";
-                break;
-            case 6:
-                str = "湲�";
-                break;
-            case 7:
-                str = "��";
-                break;
-        }
-
-        return str;
-    }
-
-    /**
-     * <pre>
-     *  �대떦�섎뒗 �좎씠 洹몃떖�� 留덉�留됱뿉 李⑥씠媛� �섎뒗 �좊쭔�� �곗궛 寃곌낵 �좊룄 �숈씪�섍쾶 怨꾩궛��
-     *  �낅젰 : 留덉�留됰궇 (31) - �ㅼ뼱�⑤궇(30) = 李⑥씠(1)
-     *  異쒕젰 : 紐⑺몴 �좎뿉�� 臾댁“嫄� 李⑥씠留뚰겮 鍮쇱꽌 怨꾩궛
-     * </pre>
-     *
-     * @param ymd   yyyyMMdd
-     * @param month
-     * @return 20130131 -> 20130228
-     */
     public static String getLastRemindDate(String ymd, int month) {
         String lastDate = getLastDateOfMonth(ymd);
 
@@ -442,16 +303,6 @@ public class DateUtil {
         return retStr;
     }
 
-    /**
-     * <pre>
-     * �대떦�섎뒗 �ъ쓽 �좎쭨�� �대떦�섎뒗 �좎쓣 �ㅼ쓬�щ룄 媛숈� �좎쭨濡� 諛섑솚�쒕떎.
-     * 1��31�� �쒕떖 �뷀븯硫� 2��31�대릺�� �섎뒗�� �좎쭨媛� �놁쑝誘�濡�, 2�� 28�쇰줈 諛섑솚
-     * </pre>
-     *
-     * @param ymd
-     * @param month
-     * @return 20130131 -> 20130228
-     */
     public static String getSameMonthDate(String ymd, int month) {
         String target = addMonth(ymd, month);
 
@@ -472,22 +323,10 @@ public class DateUtil {
         return Integer.parseInt(getCurrentDate(format));
     }
 
-    /**
-     * �붾퉬�� �낅젰�섎뒗 �묒떇�쇰줈 蹂���
-     * @return yyyy-MM-dd HH:mm:ss
-     */
     public static String getCurrentDateDBStr() {
         return getCurrentDate(DB_DATE_STR);
     }
 
-    /**
-     * [timeDiff�� �ㅻ쫫]�쒓컙李⑥씠瑜� 援ы븳��, sec(珥�), min(遺�), hr(�쒓컙)
-     * 1200 - 1300 = 1, 60, 3600
-     * @param startTime 1200
-     * @param stopTime 1300
-     * @param type (sec, min, hr - 湲곕낯媛� �쒓컙)
-     * @return long (�붾툝�꾨떂)
-     */
     public static long timeDiffTo(String startTime, String stopTime, String type) {
         String returnType = type.toUpperCase();
         long diffTime = 0;
@@ -592,11 +431,6 @@ public class DateUtil {
         return sdf.format(cal.getTime());
     }
 
-    /**
-     * utc time�� gmt濡� 蹂�寃�
-     * @param utcTime 2023-04-16T11:13:29.000Z
-     * @return 2023-04-16 20:13:29
-     */
     public static String utcToGmtDBStr(String utcTime) {
         Instant instant = Instant.parse(utcTime);
         ZonedDateTime zonedDateTime = instant.atZone(ZoneId.of("Asia/Seoul"));
@@ -604,18 +438,6 @@ public class DateUtil {
         return zonedDateTime.format(DateTimeFormatter.ofPattern(DB_DATE_STR));
     }
 
-    /**
-     * <p>�대떦 �좎쭨 踰붿쐞 �댁뿉 �대떦 �좎쭨媛� �ы븿�섏뼱�덈뒗吏� �щ�</p>
-     * <pre>
-     * containDateBetween("20240601", "20240630", "20240601") = true
-     * containDateBetween("20240601", "20240630", "20240630") = true
-     * containDateBetween("20240521", "20240630", "20240630") = false
-     * </pre>
-     * @param startRange �쒖옉踰붿쐞 �좎쭨 (yyyymmdd)
-     * @param endRange 醫낅즺踰붿쐞 �좎쭨 (yyyymmdd)
-     * @param targetDate �대떦 �좎쭨 (yyyymmdd)
-     * @return �대떦 踰붿쐞 �댁뿉 �대떦 �좎쭨媛� �ы븿�섏뼱�덈떎硫� {@code true} �꾨땲�쇰㈃ {@code false}
-     */
     public static boolean containDateBetween(String startRange, String endRange, String targetDate) {
         // param length must be...
         int length = SHORT_DATE_STR.length();
