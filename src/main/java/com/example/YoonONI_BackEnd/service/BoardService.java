@@ -2,6 +2,8 @@ package com.example.YoonONI_BackEnd.service;
 
 
 import com.example.YoonONI_BackEnd.config.RequestDataSet;
+import com.example.YoonONI_BackEnd.config.error.CommonErrorCode;
+import com.example.YoonONI_BackEnd.config.error.RestApiException;
 import com.example.YoonONI_BackEnd.mapper.BoardMapper;
 import com.example.YoonONI_BackEnd.vo.BoardVo;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +19,15 @@ import java.time.LocalDateTime;
 public class BoardService {
     private final BoardMapper boardMapper;
 
-    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> saveBoard(RequestDataSet requestDataSet) {
+        String title = requestDataSet.inGetString("title");
+        String content = requestDataSet.inGetString("content");
+
+        if (title == null || title.isBlank() || content == null || content.isBlank()) {
+            throw new RestApiException(CommonErrorCode.INVALID_PARAMETER);
+        }
+
+
         BoardVo boardVo = BoardVo.builder()
                 .content(requestDataSet.inGetString("content"))
                 .userId(requestDataSet.inGetString("userId"))
@@ -34,8 +43,15 @@ public class BoardService {
         return ResponseEntity.ok().body(boardMapper.selectAllBoard());
     }
 
-    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> updateBoard(int id, RequestDataSet requestDataSet) {
+        String title = requestDataSet.inGetString("title");
+        String content = requestDataSet.inGetString("content");
+
+        if (title == null || title.isBlank() || content == null || content.isBlank()) {
+            throw new RestApiException(CommonErrorCode.INVALID_PARAMETER);
+        }
+
+
         BoardVo boardVo = BoardVo.builder()
                 .content(requestDataSet.inGetString("content"))
                 .title(requestDataSet.inGetString("title"))
