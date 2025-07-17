@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.YoonONI_BackEnd.mapper.WorkoutLogMapper">
+    <insert id="saveLog" parameterType="com.example.YoonONI_BackEnd.vo.WorkoutLogVo">
+        INSERT INTO workout_log(
+                                workout_date, memo, user_id
+        ) VALUES (
+                  #{workoutDate}, #{memo}, #{userId}
+                         )
+    </insert>
+
+    <insert id="saveLog" parameterType="com.example.YoonONI_BackEnd.vo.WorkoutLogVo">
+        INSERT INTO workout_set(
+            workout_log_id, exercise_name, target_muscle, set_number, reps, weight
+        ) VALUES (
+                     #{workout_log_id}, #{exerciseName}, #{targetMuscle}, #{setNumber}, #{reps}, #{weight}
+                 )
+    </insert>
+
+    <select id="selectLogId" resultType="int">
+        SELECT
+            id
+        FROM
+            workout_log
+        WHERE
+            1=1
+        AND
+            workout_date = #{workoutDate}
+    </select>
+</mapper>

@@ -52,8 +52,8 @@ public class RequestDataSet {
 
                 ObjectMapper objectMapper = new ObjectMapper();
 
-                TypeReference<Map<String, String>> stringType = new TypeReference<>() {};
-                Map<String, String> jsonMap = objectMapper.readValue(jsonBody, stringType);
+                TypeReference<Map<String, Object>> stringType = new TypeReference<>() {};
+                Map<String, Object> jsonMap = objectMapper.readValue(jsonBody, stringType);
 
                 input.putAll(jsonMap);
             } else {

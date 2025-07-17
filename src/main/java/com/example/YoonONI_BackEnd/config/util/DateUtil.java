@@ -14,6 +14,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.cglib.core.Local;
 
 public class DateUtil {
     private static Log log = LogFactory.getLog(DateUtil.class);
@@ -57,6 +58,10 @@ public class DateUtil {
 
     public static String getCurrentDate() {
         return DEFAULT_DATE_FORMAT.format(new Date());
+    }
+
+    public static LocalDate getStringToDate(String date) {
+        return LocalDate.parse(date);
     }
 
     public static String getCurrentDate(int i) {
