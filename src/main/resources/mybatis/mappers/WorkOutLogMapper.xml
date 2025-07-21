@@ -11,11 +11,11 @@
                          )
     </insert>
 
-    <insert id="saveSets" parameterType="com.example.YoonONI_BackEnd.vo.WorkoutLogVo">
+    <insert id="saveSets" parameterType="com.example.YoonONI_BackEnd.vo.WorkoutSetVo">
         INSERT INTO workout_set(
             workout_log_id, exercise_name, target_muscle, set_number, reps, weight
         ) VALUES (
-                     #{workout_log_id}, #{exerciseName}, #{targetMuscle}, #{setNumber}, #{reps}, #{weight}
+                     #{workoutLogId}, #{exerciseName}, #{targetMuscle}, #{setNumber}, #{reps}, #{weight}
                  )
     </insert>
 
@@ -28,5 +28,9 @@
             1=1
         AND
             workout_date = #{workoutDate}
+    </select>
+
+    <select id="selectLogs" resultMap="WorkoutLogResultMap">
+
     </select>
 </mapper>

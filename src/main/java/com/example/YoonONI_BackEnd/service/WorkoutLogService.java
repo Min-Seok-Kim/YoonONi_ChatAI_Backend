@@ -3,6 +3,7 @@ package com.example.YoonONI_BackEnd.service;
 
 import com.example.YoonONI_BackEnd.config.RequestDataSet;
 import com.example.YoonONI_BackEnd.config.util.DateUtil;
+import com.example.YoonONI_BackEnd.dto.WorkoutLogDto;
 import com.example.YoonONI_BackEnd.mapper.WorkoutLogMapper;
 import com.example.YoonONI_BackEnd.vo.WorkoutLogVo;
 import com.example.YoonONI_BackEnd.vo.WorkoutSetVo;
@@ -55,5 +56,17 @@ public class WorkoutLogService {
         }
 
         return ResponseEntity.ok().body("저장 성공");
+    }
+
+    public ResponseEntity<?> selectLogs(RequestDataSet requestDataSet) {
+        Map<String, LocalDate> currentMonthRange = DateUtil.getCurrentMonthRange();
+
+        LocalDate sDate = currentMonthRange.get("startDate");
+        LocalDate eDate = currentMonthRange.get("startDate");
+
+
+        List<WorkoutLogDto> logs = workoutLogMapper.selectLogs(sDate, eDate);
+
+        return ResponseEntity.ok().body(logs);
     }
 }

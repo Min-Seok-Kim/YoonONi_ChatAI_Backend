@@ -6,9 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+import java.util.*;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -43,7 +41,6 @@ public class DateUtil {
 
     public static final int MILLI_SEC_A_DAY = 1000 * 60 * 60 * 24;
     public static final int MILLI_SEC_A_TIME = 1000 * 60 * 60;
-    public static final String DATE_DIV_REGEXP = "[/�꾩썡��\\-\\.:�쒕텇珥�]";
 
     public static String getCurrentDatetime() {
         return DEFAULT_DATETIME_FORMAT.format(new Date());
@@ -62,6 +59,17 @@ public class DateUtil {
 
     public static LocalDate getStringToDate(String date) {
         return LocalDate.parse(date);
+    }
+
+    public static Map<String, LocalDate> getCurrentMonthRange() {
+        LocalDate now = LocalDate.now();
+        YearMonth currentMonth = YearMonth.from(now);
+
+        Map<String, LocalDate> result = new HashMap<>();
+        result.put("startDate", currentMonth.atDay(1));
+        result.put("endDate", currentMonth.atEndOfMonth());
+
+        return result;
     }
 
     public static String getCurrentDate(int i) {
