@@ -62,10 +62,12 @@ public class WorkoutLogService {
         Map<String, LocalDate> currentMonthRange = DateUtil.getCurrentMonthRange();
 
         LocalDate sDate = currentMonthRange.get("startDate");
-        LocalDate eDate = currentMonthRange.get("startDate");
+        LocalDate eDate = currentMonthRange.get("endDate");
 
 
         List<WorkoutLogDto> logs = workoutLogMapper.selectLogs(sDate, eDate);
+
+        System.out.println(logs);
 
         return ResponseEntity.ok().body(logs);
     }

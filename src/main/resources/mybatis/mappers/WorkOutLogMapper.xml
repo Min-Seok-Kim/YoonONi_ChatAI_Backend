@@ -31,6 +31,36 @@
     </select>
 
     <select id="selectLogs" resultMap="WorkoutLogResultMap">
-
+        SELECT
+            a.workout_date,
+            a.memo,
+            b.exercise_name,
+            b.target_muscle,
+            b.set_number,
+            b.reps,
+            b.weight
+        FROM
+            workout_log a
+        LEFT JOIN
+                workout_set b
+        ON
+            a.id = b.workout_log_id
+        WHERE
+            a.workout_date
+        BETWEEN #{sDate} AND #{eDate}
+        ORDER BY
+            a.workout_date, b.set_number
     </select>
+
+    <resultMap id="WorkoutLogResultMap" type="com.example.YoonONI_BackEnd.dto.WorkoutLogDto">
+        <result property="workoutDate" column="workout_date"/>
+        <result property="memo" column="memo"/>
+        <collection property="sets" ofType="com.example.YoonONI_BackEnd.dto.WorkoutSetDto">
+            <result property="exerciseName" column="exercise_name"/>
+            <result property="targetMuscle" column="target_muscle"/>
+            <result property="setNumber" column="set_number"/>
+            <result property="reps" column="reps"/>
+            <result property="weight" column="weight"/>
+        </collection>
+    </resultMap>
 </mapper>
