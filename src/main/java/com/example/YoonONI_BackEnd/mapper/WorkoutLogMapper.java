@@ -15,5 +15,6 @@ public interface WorkoutLogMapper {
     void saveLog(WorkoutLogVo workoutLogVo);
     void saveSets(WorkoutSetVo workoutSetVo);
     int selectLogId(WorkoutLogVo workoutLogVo);
-    List<WorkoutLogDto> selectLogs(@Param("sDate") LocalDate sDate, @Param("eDate")LocalDate eDate);
+    List<WorkoutLogDto> selectLogs(@Param("sDate") LocalDate sDate, @Param("eDate")LocalDate eDate, @Param("userId")String userId);
+    List<WorkoutLogDto> selectLog(@Param("workoutDate") String workoutDate, @Param("userId")String userId);
 }

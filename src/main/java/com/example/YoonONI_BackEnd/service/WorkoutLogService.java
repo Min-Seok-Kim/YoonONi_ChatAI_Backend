@@ -64,11 +64,20 @@ public class WorkoutLogService {
         LocalDate sDate = currentMonthRange.get("startDate");
         LocalDate eDate = currentMonthRange.get("endDate");
 
+        String userId = requestDataSet.inGetString("userId");
 
-        List<WorkoutLogDto> logs = workoutLogMapper.selectLogs(sDate, eDate);
+        List<WorkoutLogDto> logs = workoutLogMapper.selectLogs(sDate, eDate, userId);
 
         System.out.println(logs);
 
         return ResponseEntity.ok().body(logs);
+    }
+
+    public ResponseEntity<?> selectLog(RequestDataSet requestDataSet) {
+        String workoutDate = requestDataSet.inGetString("workout_date");
+        String userId = requestDataSet.inGetString("userId");
+
+        List<WorkoutLogDto> log = workoutLogMapper.selectLog(workoutDate, userId);
+        return ResponseEntity.ok().body(log);
     }
 }

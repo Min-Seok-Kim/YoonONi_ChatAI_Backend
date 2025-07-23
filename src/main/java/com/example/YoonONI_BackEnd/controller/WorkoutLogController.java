@@ -21,8 +21,13 @@ public class WorkoutLogController {
         return workoutLogService.logSave(requestDataSet);
     }
 
-    @GetMapping("/select")
+    @GetMapping("/select/all")
     public ResponseEntity<?> select(RequestDataSet requestDataSet) {
         return workoutLogService.selectLogs(requestDataSet);
+    }
+
+    @GetMapping("/select")
+    public ResponseEntity<?> selectAll(RequestDataSet requestDataSet) {
+        return workoutLogService.selectLog(requestDataSet);
     }
 }

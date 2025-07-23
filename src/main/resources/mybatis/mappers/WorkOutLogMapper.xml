@@ -30,7 +30,7 @@
             workout_date = #{workoutDate}
     </select>
 
-    <select id="selectLogs" resultMap="WorkoutLogResultMap">
+    <select id="selectLogs" resultMap="WorkoutLogsResultMap">
         SELECT
             a.workout_date,
             a.memo,
@@ -48,8 +48,41 @@
         WHERE
             a.workout_date
         BETWEEN #{sDate} AND #{eDate}
+        AND a.user_id = #{userId}
         ORDER BY
             a.workout_date, b.set_number
+    </select>
+
+    <resultMap id="WorkoutLogsResultMap" type="com.example.YoonONI_BackEnd.dto.WorkoutLogDto">
+        <result property="workoutDate" column="workout_date"/>
+        <result property="memo" column="memo"/>
+        <collection property="sets" ofType="com.example.YoonONI_BackEnd.dto.WorkoutSetDto">
+            <result property="exerciseName" column="exercise_name"/>
+            <result property="targetMuscle" column="target_muscle"/>
+            <result property="setNumber" column="set_number"/>
+            <result property="reps" column="reps"/>
+            <result property="weight" column="weight"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectLog" resultMap="WorkoutLogResultMap">
+        SELECT
+            a.workout_date,
+            a.memo,
+            b.exercise_name,
+            b.target_muscle,
+            b.set_number,
+            b.reps,
+            b.weight
+        FROM
+            workout_log a
+        INNER JOIN workout_set b
+        ON
+            a.id = b.workout_log_id
+        WHERE
+            a.user_id = #{userId}
+        AND
+            a.workout_date = #{workoutDate}
     </select>
 
     <resultMap id="WorkoutLogResultMap" type="com.example.YoonONI_BackEnd.dto.WorkoutLogDto">
