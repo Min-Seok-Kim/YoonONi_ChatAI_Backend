@@ -110,4 +110,8 @@ public class UserService {
 
         return ResponseEntity.ok(new JwtResponseDto(jwt, userDetails.getUsername()));
     }
+
+    public ResponseEntity<?> logout(RequestDataSet requestDataSet) {
+
+    }
 }
