@@ -1,6 +1,7 @@
 package com.example.YoonONI_BackEnd.config.error;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -59,5 +60,15 @@ public class GlobalExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(errorResponse, CommonErrorCode.INTERNAL_SERVER_ERROR.getHttpStatus());
+    }
+
+    @ExceptionHandler(TooManyResultsException.class)
+    public ResponseEntity<ErrorResponse> handleTooManyResultsException(TooManyResultsException ex) {
+        log.error("TooManyResultsException 발생", ex);
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code(CommonErrorCode.DUPLICATE_DATA.name())
+                .message("결과가 여러 건입니다. 예상과 다릅니다.")
+                .build();
+        return new ResponseEntity<>(errorResponse, CommonErrorCode.DUPLICATE_DATA.getHttpStatus());
     }
 }
