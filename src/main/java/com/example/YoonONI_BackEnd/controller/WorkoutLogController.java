@@ -24,12 +24,12 @@ public class WorkoutLogController {
     }
 
     @GetMapping("/select/all")
-    public ResponseEntity<?> select(RequestDataSet requestDataSet) {
+    public ResponseEntity<?> selectAll(RequestDataSet requestDataSet) {
         return workoutLogService.selectLogs(requestDataSet);
     }
 
     @GetMapping("/select")
-    public ResponseEntity<?> selectAll(RequestDataSet requestDataSet) {
+    public ResponseEntity<?> select(RequestDataSet requestDataSet) {
         return workoutLogService.selectLog(requestDataSet);
     }
 }
