@@ -25,9 +25,4 @@ public class UserController {
 
         return userService.login(requestDataSet);
     }
-
-    @PostMapping("/logout")
-    public ResponseEntity<?> logout(RequestDataSet requestDataSet) {
-        return userService.logout(requestDataSet);
-    }
 }
