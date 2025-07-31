@@ -16,4 +16,6 @@ public interface BoardMapper {
     void updateBoard(@Param("id") int id, @Param("boardVo") BoardVo boardVo);
 
     void deleteBoard(int id);
+
+    BoardVo selectBoard(String id);
 }

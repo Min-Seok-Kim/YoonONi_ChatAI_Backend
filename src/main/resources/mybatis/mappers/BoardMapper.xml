@@ -18,6 +18,15 @@
             board
     </select>
 
+    <select id="selectBoard" resultType="com.example.YoonONI_BackEnd.vo.BoardVo">
+        SELECT
+            id, title, user_id, content, write_at, updated_at
+        FROM
+            board
+        WHERE
+            id = #{id};
+    </select>
+
     <update id="updateBoard">
         update
             board

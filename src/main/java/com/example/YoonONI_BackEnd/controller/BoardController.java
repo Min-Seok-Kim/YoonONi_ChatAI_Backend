@@ -20,9 +20,14 @@ public class BoardController {
         return boardService.saveBoard(requestDataSet);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<?> search(RequestDataSet requestDataSet) {
+    @GetMapping("/select/all")
+    public ResponseEntity<?> selectAll(RequestDataSet requestDataSet) {
         return boardService.selectAllBoard(requestDataSet);
+    }
+
+    @GetMapping("/select")
+    public ResponseEntity<?> select(RequestDataSet requestDataSet) {
+        return boardService.selectBoard(requestDataSet);
     }
 
     @PutMapping("/:{id}")

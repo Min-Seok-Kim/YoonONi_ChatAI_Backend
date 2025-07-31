@@ -39,8 +39,11 @@ public class BoardService {
     }
 
     public ResponseEntity<?> selectAllBoard(RequestDataSet requestDataSet) {
-
         return ResponseEntity.ok().body(boardMapper.selectAllBoard());
+    }
+
+    public ResponseEntity<?> selectBoard(RequestDataSet requestDataSet) {
+        return ResponseEntity.ok().body(boardMapper.selectBoard(requestDataSet.inGetString("id")));
     }
 
     public ResponseEntity<?> updateBoard(int id, RequestDataSet requestDataSet) {
