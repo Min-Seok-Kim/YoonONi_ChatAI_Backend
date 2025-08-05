@@ -1,6 +1,7 @@
 package com.example.YoonONI_BackEnd.controller;
 
 
+import com.example.YoonONI_BackEnd.config.RequestDataSet;
 import com.example.YoonONI_BackEnd.service.ChatGPTService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/chat-gpt")
+@RequestMapping("/gpt")
 public class ChatGPTController {
     private final ChatGPTService chatGPTService;
 
@@ -22,5 +23,10 @@ public class ChatGPTController {
     public ResponseEntity<List<Map<String, Object>>> selectModelList() {
         List<Map<String, Object>> result = chatGPTService.modelList();
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/chat-bot")
+    public ResponseEntity<String> chatBot(RequestDataSet requestDataSet) {
+        return chatGPTService.chat(requestDataSet);
     }
 }

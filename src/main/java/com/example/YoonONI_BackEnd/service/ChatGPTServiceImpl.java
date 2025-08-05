@@ -1,6 +1,7 @@
 package com.example.YoonONI_BackEnd.service;
 
 import com.example.YoonONI_BackEnd.config.ChatGPTConfig;
+import com.example.YoonONI_BackEnd.config.RequestDataSet;
 import com.example.YoonONI_BackEnd.dto.ChatCompletionDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -8,16 +9,15 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Slf4j
@@ -26,6 +26,8 @@ import java.util.Map;
 public class ChatGPTServiceImpl implements ChatGPTService{
 
     private final ChatGPTConfig chatGPTConfig;
+
+    private final RestTemplate restTemplate;
 
 
     @Value("${openai.url.model}")
@@ -47,7 +49,7 @@ public class ChatGPTServiceImpl implements ChatGPTService{
      */
     @Override
     public List<Map<String, Object>> modelList() {
-        log.debug("[+] 모델 리스트를 조회합니다.");
+        log.info("[+] 모델 리스트를 조회합니다.");
         List<Map<String, Object>> resultList = null;
 
         // [STEP1] 토큰 정보가 포함된 Header를 가져옵니다.
@@ -174,5 +176,46 @@ public class ChatGPTServiceImpl implements ChatGPTService{
             log.debug("RuntimeException :: " + e.getMessage());
         }
         return resultMap;
+    }
+
+    @Override
+    public ResponseEntity<String> chat(RequestDataSet requestDataSet) throws JSONException {
+        HttpHeaders headers = new HttpHeaders(); // HTTP 헤더 생성
+        headers.setContentType(MediaType.APPLICATION_JSON); // 요청 본문 타입 설정
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON)); // 수신할 응답 타입 설정
+        String apiKey = ""; // 발급받은 API 키 설정 (여기서는 지움)
+        headers.set("Authorization", "Bearer " + apiKey); // 인증 헤더에 API 키 추가
+
+        JSONObject messageSystem = new JSONObject(); // 시스템 메시지 JSON 객체 생성
+        messageSystem.put("role", "system");  // 역할 설정
+        messageSystem.put("content", "너는 스프링 챗지피티 프로젝트 도우미야. 모든 답변은 간단한 자기소개 후에 해줘."); // 시스템 메시지 추가
+
+        JSONObject messageUser = new JSONObject(); // 사용자 메시지 JSON 객체 생성
+        messageUser.put("role", "user"); // 역할 설정
+        messageUser.put("content", requestDataSet.inGetString("content")); // 사용자 메시지 추가
+
+        JSONObject requestBody = new JSONObject(); // 요청 본문을 위한 JSON 객체 생성
+        requestBody.put("model", "gpt-4o-2024-05-13"); // 사용할 모델 설정
+        requestBody.put("messages", new JSONArray(Arrays.asList(messageSystem, messageUser))); // 메시지 배열 추가
+
+        HttpEntity<String> request = new HttpEntity<>(requestBody.toString(), headers); // HTTP 요청 엔티티 생성
+
+        String apiEndpoint = "https://api.openai.com/v1/chat/completions"; // API 엔드포인트 설정
+        try {
+            // REST API 호출을 통해 응답 받기
+            ResponseEntity<String> response = restTemplate.postForEntity(apiEndpoint, request, String.class);
+
+            // 응답 상태 코드 확인
+            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
+                return response;  // 성공적인 응답 반환
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("api 호출 중 오류 발생!"); // 오류 메시지 반환
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("api 호출 중 예외 발생: " + e.getMessage()); // 예외 메시지 반환
+        }
+    }
     }
 }
