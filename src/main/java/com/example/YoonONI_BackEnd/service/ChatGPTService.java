@@ -16,5 +16,5 @@ public interface ChatGPTService {
     Map<String, Object> legacyPrompt(ChatCompletionDto completionDto);
 
     Map<String, Object> prompt(ChatCompletionDto chatCompletionDto);
-    ResponseEntity<String> chat(RequestDataSet requestDataSet) throws JSONException;
+    ResponseEntity<String> chat(RequestDataSet requestDataSet);
 }

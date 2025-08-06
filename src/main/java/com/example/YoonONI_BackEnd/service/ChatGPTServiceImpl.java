@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -179,12 +178,11 @@ public class ChatGPTServiceImpl implements ChatGPTService{
     }
 
     @Override
-    public ResponseEntity<String> chat(RequestDataSet requestDataSet) throws JSONException {
+    public ResponseEntity<String> chat(RequestDataSet requestDataSet){
         HttpHeaders headers = new HttpHeaders(); // HTTP 헤더 생성
         headers.setContentType(MediaType.APPLICATION_JSON); // 요청 본문 타입 설정
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON)); // 수신할 응답 타입 설정
-        String apiKey = ""; // 발급받은 API 키 설정 (여기서는 지움)
-        headers.set("Authorization", "Bearer " + apiKey); // 인증 헤더에 API 키 추가
+        headers.set("Authorization", "Bearer " + chatGPTConfig.getSecretKey()); // 인증 헤더에 API 키 추가
 
         JSONObject messageSystem = new JSONObject(); // 시스템 메시지 JSON 객체 생성
         messageSystem.put("role", "system");  // 역할 설정
@@ -216,6 +214,5 @@ public class ChatGPTServiceImpl implements ChatGPTService{
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("api 호출 중 예외 발생: " + e.getMessage()); // 예외 메시지 반환
         }
-    }
     }
 }
