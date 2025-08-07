@@ -55,7 +55,9 @@ public class RequestDataSet {
                 TypeReference<Map<String, Object>> stringType = new TypeReference<>() {};
                 Map<String, Object> jsonMap = objectMapper.readValue(jsonBody, stringType);
 
-                input.putAll(jsonMap);
+                if (jsonMap != null) {
+                    input.putAll(jsonMap);
+                }
             } else {
                 Map<String, String[]> paramMap = request.getParameterMap();
 
