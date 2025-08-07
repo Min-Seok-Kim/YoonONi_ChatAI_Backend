@@ -80,4 +80,12 @@ public class WorkoutLogService {
         List<WorkoutLogDto> log = workoutLogMapper.selectLog(workoutDate, userId);
         return ResponseEntity.ok().body(log);
     }
+
+    public ResponseEntity<?> countLog(RequestDataSet requestDataSet) {
+        String userId = requestDataSet.inGetString("userId");
+
+        int logs = workoutLogMapper.countLog(userId);
+
+        return ResponseEntity.ok().body(logs);
+    }
 }

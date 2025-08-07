@@ -32,4 +32,9 @@ public class WorkoutLogController {
     public ResponseEntity<?> select(RequestDataSet requestDataSet) {
         return workoutLogService.selectLog(requestDataSet);
     }
+
+    @GetMapping("/count")
+    public ResponseEntity<?> count(RequestDataSet requestDataSet) {
+        return workoutLogService.countLog(requestDataSet);
+    }
 }
