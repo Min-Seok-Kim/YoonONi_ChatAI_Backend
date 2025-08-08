@@ -81,10 +81,23 @@ public class WorkoutLogService {
         return ResponseEntity.ok().body(log);
     }
 
-    public ResponseEntity<?> countLog(RequestDataSet requestDataSet) {
+    public ResponseEntity<?> countMonthLog(RequestDataSet requestDataSet) {
         String userId = requestDataSet.inGetString("userId");
 
-        int logs = workoutLogMapper.countLog(userId);
+        Map<String, LocalDate> currentMonthRange = DateUtil.getCurrentMonthRange();
+
+        LocalDate sDate = currentMonthRange.get("startDate");
+        LocalDate eDate = currentMonthRange.get("endDate");
+
+        int logs = workoutLogMapper.countMonthLog(userId, sDate, eDate);
+
+        return ResponseEntity.ok().body(logs);
+    }
+
+    public ResponseEntity<?> countYearLog(RequestDataSet requestDataSet) {
+        String userId = requestDataSet.inGetString("userId");
+
+        int logs = workoutLogMapper.countYearLog(userId);
 
         return ResponseEntity.ok().body(logs);
     }

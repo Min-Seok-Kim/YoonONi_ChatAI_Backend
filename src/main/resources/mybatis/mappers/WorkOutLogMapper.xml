@@ -30,13 +30,25 @@
             workout_date = #{workoutDate}
     </select>
 
-    <select id="countLog" resultType="int">
+    <select id="countMonthLog" resultType="int">
         SELECT
             COUNT(*)
         FROM
             workout_log
         where
+            workout_date
+        BETWEEN #{sDate} AND #{eDate}
+        AND
             user_id = #{userId}
+    </select>
+
+    <select id="countYearLog" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            workout_log
+        WHERE
+            user_id = #{user_id}
     </select>
 
     <select id="selectLogs" resultMap="WorkoutLogsResultMap">
