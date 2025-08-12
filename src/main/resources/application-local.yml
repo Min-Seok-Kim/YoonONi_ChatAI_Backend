@@ -8,7 +8,7 @@ spring:
 
   jwt:
     secret: 9E6436E6EB6D3B111EBFC58691E53aaaaaaaaaaaaaaaabbbbb
-    expiration: 3600000
+    expiration: 360000000
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
