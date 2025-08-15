@@ -33,4 +33,11 @@
             user_id = #{userId}
     </select>
 
+    <insert id="saveGoal" parameterType="com.example.YoonONI_BackEnd.vo.GoalVo">
+        INSERT INTO goal (
+                          user_id, year, week, weekly_goal
+        ) VALUES (
+                  #{userId}, #{year}, #{week}, #{weeklyGoal}
+                         )
+    </insert>
 </mapper>

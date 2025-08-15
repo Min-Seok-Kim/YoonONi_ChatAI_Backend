@@ -3,8 +3,10 @@ package com.example.YoonONI_BackEnd.service.auth;
 
 import com.example.YoonONI_BackEnd.config.security.JwtTokenProvider;
 import com.example.YoonONI_BackEnd.config.RequestDataSet;
+import com.example.YoonONI_BackEnd.config.util.DateUtil;
 import com.example.YoonONI_BackEnd.dto.JwtResponseDto;
 import com.example.YoonONI_BackEnd.mapper.UserMapper;
+import com.example.YoonONI_BackEnd.vo.GoalVo;
 import com.example.YoonONI_BackEnd.vo.UserVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -17,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -111,4 +114,16 @@ public class UserService {
         return ResponseEntity.ok(new JwtResponseDto(jwt, userDetails.getUsername()));
     }
 
+    public ResponseEntity<?> saveGoal(RequestDataSet requestDataSet) {
+        Map<String, Integer> iso = DateUtil.getIsoWeekYear();
+
+        GoalVo goal = GoalVo.builder()
+                .userId(requestDataSet.inGetString("userId"))
+                .year(iso.get("year"))
+                .week(iso.get("week"))
+                .weeklyGoal(Integer.parseInt(requestDataSet.inGetString("weeklyGoal")))
+                .build();
+        userMapper.saveGoal(goal);
+        return ResponseEntity.ok().body("저장 완료");
+    }
 }

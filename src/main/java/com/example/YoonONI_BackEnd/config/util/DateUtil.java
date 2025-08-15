@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.WeekFields;
 import java.util.*;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -68,6 +69,20 @@ public class DateUtil {
         Map<String, LocalDate> result = new HashMap<>();
         result.put("startDate", currentMonth.atDay(1));
         result.put("endDate", currentMonth.atEndOfMonth());
+
+        return result;
+    }
+
+    public static Map<String, Integer> getIsoWeekYear() {
+        LocalDate date = LocalDate.now();
+        WeekFields weekFields = WeekFields.ISO;
+        int isoWeek = date.get(weekFields.weekOfWeekBasedYear());
+        int isoYear = date.get(weekFields.weekBasedYear());
+
+        Map<String, Integer> result = new HashMap<>();
+
+        result.put("week", isoWeek);
+        result.put("year", isoYear);
 
         return result;
     }
