@@ -18,6 +18,7 @@ public interface WorkoutLogMapper {
     int selectLogId(WorkoutLogVo workoutLogVo);
     List<WorkoutLogDto> selectLogs(@Param("sDate") LocalDate sDate, @Param("eDate")LocalDate eDate, @Param("userId")String userId);
     List<WorkoutLogDto> selectLog(@Param("workoutDate") String workoutDate, @Param("userId")String userId);
+    int countWeekLog(@Param("userId")String userId, @Param("monday") LocalDate monday, @Param("sunday")LocalDate sunday);
     int countMonthLog(@Param("userId")String userId, @Param("sDate") LocalDate sDate, @Param("eDate") LocalDate eDate);
-    int countYearLog(String userId);
+    Integer selectGoal(@Param("userId")String userId, @Param("monday") LocalDate monday, @Param("sunday")LocalDate sunday);
 }

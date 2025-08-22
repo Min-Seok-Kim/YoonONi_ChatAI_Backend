@@ -34,10 +34,10 @@
     </select>
 
     <insert id="saveGoal" parameterType="com.example.YoonONI_BackEnd.vo.GoalVo">
-        INSERT INTO goal (
-                          user_id, year, week, weekly_goal
+        INSERT INTO weekly_goal (
+                          user_id, week_start_date, week_end_date, goal_count
         ) VALUES (
-                  #{userId}, #{year}, #{week}, #{weeklyGoal}
+                  #{userId}, #{weekStartDate}, #{weekEndDate}, #{goalCount}
                          )
     </insert>
 </mapper>

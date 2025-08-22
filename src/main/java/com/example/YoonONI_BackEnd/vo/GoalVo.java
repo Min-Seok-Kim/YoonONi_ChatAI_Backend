@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -12,7 +15,7 @@ import lombok.ToString;
 @Builder
 public class GoalVo {
     private String userId;
-    private int year;
-    private int week;
-    private int weeklyGoal;
+    private LocalDate weekStartDate;
+    private LocalDate weekEndDate;
+    private int goalCount;
 }

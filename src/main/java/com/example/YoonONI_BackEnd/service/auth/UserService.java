@@ -115,13 +115,13 @@ public class UserService {
     }
 
     public ResponseEntity<?> saveGoal(RequestDataSet requestDataSet) {
-        Map<String, Integer> iso = DateUtil.getIsoWeekYear();
+        Map<String, LocalDate> currentWeek = DateUtil.getCurrentWeekRange();
 
         GoalVo goal = GoalVo.builder()
                 .userId(requestDataSet.inGetString("userId"))
-                .year(iso.get("year"))
-                .week(iso.get("week"))
-                .weeklyGoal(Integer.parseInt(requestDataSet.inGetString("weeklyGoal")))
+                .weekStartDate(currentWeek.get("monday"))
+                .weekEndDate(currentWeek.get("sunday"))
+                .goalCount(Integer.parseInt(requestDataSet.inGetString("weeklyGoal")))
                 .build();
         userMapper.saveGoal(goal);
         return ResponseEntity.ok().body("저장 완료");

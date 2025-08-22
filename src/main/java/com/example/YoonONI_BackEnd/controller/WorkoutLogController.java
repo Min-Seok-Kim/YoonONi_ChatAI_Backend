@@ -33,13 +33,13 @@ public class WorkoutLogController {
         return workoutLogService.selectLog(requestDataSet);
     }
 
-    @GetMapping("/count")
-    public ResponseEntity<?> countMonthLog(RequestDataSet requestDataSet) {
-        return workoutLogService.countMonthLog(requestDataSet);
+    @GetMapping("/count/week")
+    public ResponseEntity<?> countWeekLog(RequestDataSet requestDataSet) {
+        return workoutLogService.countWeekLog(requestDataSet);
     }
 
-    @GetMapping("/count/year")
-    public ResponseEntity<?> countYearLog(RequestDataSet requestDataSet) {
-        return workoutLogService.countYearLog(requestDataSet);
+    @GetMapping("/count/month")
+    public ResponseEntity<?> countMonthLog(RequestDataSet requestDataSet) {
+        return workoutLogService.countMonthLog(requestDataSet);
     }
 }

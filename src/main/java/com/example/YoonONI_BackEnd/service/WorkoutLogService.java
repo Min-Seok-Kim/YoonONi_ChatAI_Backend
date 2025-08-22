@@ -81,6 +81,24 @@ public class WorkoutLogService {
         return ResponseEntity.ok().body(log);
     }
 
+    public ResponseEntity<?> countWeekLog(RequestDataSet requestDataSet) {
+        String userId = requestDataSet.inGetString("userId");
+
+        Map<String, LocalDate> currentWeekRange = DateUtil.getCurrentWeekRange();
+
+        LocalDate monday = currentWeekRange.get("monday");
+        LocalDate sunday = currentWeekRange.get("sunday");
+
+        int logs = workoutLogMapper.countWeekLog(userId, monday, sunday);
+
+        Integer goal = workoutLogMapper.selectGoal(userId, monday, sunday);
+        int weeklyGoal = (goal != null) ? goal : 0;
+
+        int goalRate = weeklyGoal == 0 ? 0 : (int) ((logs / (double) weeklyGoal) * 100);
+
+        return ResponseEntity.ok().body(goalRate);
+    }
+
     public ResponseEntity<?> countMonthLog(RequestDataSet requestDataSet) {
         String userId = requestDataSet.inGetString("userId");
 
@@ -90,14 +108,6 @@ public class WorkoutLogService {
         LocalDate eDate = currentMonthRange.get("endDate");
 
         int logs = workoutLogMapper.countMonthLog(userId, sDate, eDate);
-
-        return ResponseEntity.ok().body(logs);
-    }
-
-    public ResponseEntity<?> countYearLog(RequestDataSet requestDataSet) {
-        String userId = requestDataSet.inGetString("userId");
-
-        int logs = workoutLogMapper.countYearLog(userId);
 
         return ResponseEntity.ok().body(logs);
     }

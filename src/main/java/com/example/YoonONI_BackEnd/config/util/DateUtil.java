@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.WeekFields;
 import java.util.*;
 
@@ -70,6 +72,18 @@ public class DateUtil {
         result.put("startDate", currentMonth.atDay(1));
         result.put("endDate", currentMonth.atEndOfMonth());
 
+        return result;
+    }
+
+    public static Map<String, LocalDate> getCurrentWeekRange() {
+        LocalDate today = LocalDate.now();
+        LocalDate monday = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDate sunday = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+
+        Map<String, LocalDate> result = new HashMap<>();
+
+        result.put("monday", monday);
+        result.put("sunday", sunday);
         return result;
     }
 
