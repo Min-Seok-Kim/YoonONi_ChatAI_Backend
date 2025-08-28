@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
-
-    // ✅ 사용자 정의 예외 처리
     @ExceptionHandler(RestApiException.class)
     public ResponseEntity<ErrorResponse> handleRestApiException(RestApiException ex) {
         ErrorCode errorCode = ex.getErrorCode();
@@ -30,7 +28,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, errorCode.getHttpStatus());
     }
 
-    // ✅ Validation 예외 처리 (DTO 검증 실패 등)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex) {
 
@@ -49,7 +46,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, CommonErrorCode.INVALID_PARAMETER.getHttpStatus());
     }
 
-    // ✅ 그 외 모든 예외 처리 (예: NullPointerException 등)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception ex) {
         log.error("Unexpected exception occurred", ex);
