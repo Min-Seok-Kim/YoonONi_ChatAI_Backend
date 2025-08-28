@@ -19,7 +19,6 @@ public class MyPageService {
         String userId = requestDataSet.inGetString("userId");
 
         MyPageVo result = myPageMapper.selectMyPage(userId);
-
         return ResponseEntity.ok().body(result);
     }
 }
