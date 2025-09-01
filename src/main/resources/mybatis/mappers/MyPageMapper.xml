@@ -13,5 +13,18 @@
         FROM users
         WHERE user_id = #{userId}
     </select>
+    
+    <update id="changePassword" parameterType="com.example.YoonONI_BackEnd.vo.MyPagePwdVo">
+        UPDATE
+            users
+        SET
+            password = #{newPassword}
+        WHERE user_id = #{userId}
+    </update>
 
+    <delete id="deleteId" parameterType="string">
+        DELETE
+        FROM users
+        WHERE user_id = #{userId}
+    </delete>
 </mapper>

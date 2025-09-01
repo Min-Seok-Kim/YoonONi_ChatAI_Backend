@@ -5,9 +5,8 @@ import com.example.YoonONI_BackEnd.config.RequestDataSet;
 import com.example.YoonONI_BackEnd.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,5 +17,15 @@ public class MyPageController {
     @GetMapping("/select")
     public ResponseEntity<?> select(RequestDataSet requestDataSet) {
         return myPageService.selectMyPage(requestDataSet);
+    }
+
+    @PutMapping("/change/password")
+    public ResponseEntity<?> modify(RequestDataSet requestDataSet) {
+        return myPageService.changePassword(requestDataSet);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> delete(RequestDataSet requestDataSet) {
+        return myPageService.deleteId(requestDataSet);
     }
 }
