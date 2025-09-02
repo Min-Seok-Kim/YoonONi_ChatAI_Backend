@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -32,6 +33,7 @@ public class UserService {
 
     private final JwtTokenProvider jwtTokenProvider;
 
+    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> signUp(RequestDataSet requestDataSet) {
         String userId = requestDataSet.inGetString("userId");
         String password = requestDataSet.inGetString("password");
