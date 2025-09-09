@@ -186,7 +186,7 @@ public class ChatGPTServiceImpl implements ChatGPTService{
 
         JSONObject messageSystem = new JSONObject(); // 시스템 메시지 JSON 객체 생성
         messageSystem.put("role", "system");  // 역할 설정
-        messageSystem.put("content", "너는 스프링 챗지피티 프로젝트 도우미야. 모든 답변은 간단한 자기소개 후에 해줘."); // 시스템 메시지 추가
+        messageSystem.put("content", "모든 답변의 시작은 안녕하세요 FitLog입니다 ! 로 시작해줘. 그리고 텍스트만 있는 건 딱딱해 보이니까 이모티콘도 적절히 섞어가며 답변해줘 "); // 시스템 메시지 추가
 
         JSONObject messageUser = new JSONObject(); // 사용자 메시지 JSON 객체 생성
         messageUser.put("role", "user"); // 역할 설정
