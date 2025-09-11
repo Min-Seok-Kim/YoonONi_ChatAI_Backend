@@ -4,7 +4,7 @@ server:
 spring:
   config:
     activate:
-      on-profile: prod
+      on-profile: local
 
   jwt:
     secret: 9E6436E6EB6D3B111EBFC58691E53aaaaaaaaaaaaaaaabbbbb
@@ -12,7 +12,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/YoonONi?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://db-fitlog.c324sysukalg.ap-northeast-2.rds.amazonaws.com/YoonONi?serverTimezone=UTC&characterEncoding=UTF-8
     username: ${USERNAME}
     password: ${PASSWORD}
 
@@ -20,8 +20,8 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
-      ddl-auto: update # 데이터 유지하려면 update, 테스트용이면 create 가능
-    database-platform: org.hibernate.dialect.MySQLDialect # MySQL 방언 설정 추가
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
 
 
 logging:
