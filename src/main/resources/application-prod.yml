@@ -2,9 +2,6 @@ server:
   port: 8084
 
 spring:
-  config:
-    activate:
-      on-profile: prod
 
   jwt:
     secret: ${SECRET}
