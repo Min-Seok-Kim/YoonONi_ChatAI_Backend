@@ -7,8 +7,8 @@ spring:
       on-profile: prod
 
   jwt:
-    secret: 9E6436E6EB6D3B111EBFC58691E53aaaaaaaaaaaaaaaabbbbb
-    expiration: 360000000
+    secret: ${SECRET}
+    expiration: ${EXPIRATION}
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
