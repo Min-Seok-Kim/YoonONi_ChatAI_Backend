@@ -54,6 +54,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedOrigins(List.of("http://52.78.232.199")); // 배포 프론트 주소
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowCredentials(true); // 쿠키나 인증 정보 등을 함께 보낼 수 있도록 허용
         configuration.setAllowedHeaders(List.of("*")); // 프론트에서 보낼 수 있는 헤더 목록을 지정

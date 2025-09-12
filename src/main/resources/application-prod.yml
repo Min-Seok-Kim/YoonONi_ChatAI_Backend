@@ -2,7 +2,6 @@ server:
   port: 8084
 
 spring:
-
   jwt:
     secret: ${SECRET}
     expiration: ${EXPIRATION}
