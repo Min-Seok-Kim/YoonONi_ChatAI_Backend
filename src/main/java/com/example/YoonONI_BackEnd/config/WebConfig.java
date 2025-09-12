@@ -18,12 +18,4 @@ public class WebConfig implements WebMvcConfigurer {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(requestArgumentResolver);
     }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000") // 프론트 주소
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowCredentials(true);
-    }
 }
